@@ -22,8 +22,10 @@ namespace jjangchin_kiosk
             // ThemeManager.ApplyTheme(new Theme(Tizen.Applications.Application.Current.DirectoryInfo.Resource + "theme/theme.xaml"));
 
             mainPage = new BlackScreen();
-            GetDefaultWindow().Add(mainPage);
-            GetDefaultWindow().KeyEvent += OnScene1KeyEvent;
+            
+            Window.Instance.Add(mainPage);
+            Window.Instance.Add(new Scene1Page());
+            // GetDefaultWindow().KeyEvent += OnScene1KeyEvent;
         }
 
         private void OnScene1KeyEvent(object sender, Window.KeyEventArgs e)

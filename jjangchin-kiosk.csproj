@@ -19,7 +19,6 @@
     <None Remove="KioskPage1.xaml" />
     <None Remove="KioskPage2.xaml" />
     <None Remove="MainPage1.xaml" />
-    <None Remove="MainPage2.xaml" />
     <None Remove="SelectPage.xaml" />
   </ItemGroup>
 
@@ -51,6 +50,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Tizen.NET" Version="9.0.0.16500" />
     <PackageReference Include="Tizen.NET.Internals" Version="9.0.0.16500" />
     <PackageReference Include="Tizen.NUI.XamlBuild" Version="1.0.28" />
@@ -58,6 +58,8 @@
 
   <PropertyGroup>
     <NeedInjection>True</NeedInjection>
+    <SignAssembly>true</SignAssembly>
+    <StartupObject>jjangchin_kiosk.Program</StartupObject>
   </PropertyGroup>
 
 </Project>

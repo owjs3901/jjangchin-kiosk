@@ -9,5 +9,6 @@
     <View.Layout>
         <LinearLayout LinearOrientation="Vertical" LinearAlignment="Center"></LinearLayout>
     </View.Layout>
+    <ImageView ResourceUrl="*Resource*/images/cafe.png"/>
 
 </View>

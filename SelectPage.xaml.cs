@@ -32,6 +32,8 @@ namespace jjangchin_kiosk
         }
         private void Yes_Button_ClickEvent(object sender, Tizen.NUI.Components.Button e)
         {
+            Utils.RequestPost($"/order/{Program.nowUserId}/{Data}");
+
             if (Program.selectedUser != null)
                 Program.selectedUser.Resent[0].Name = Data;
             Window.Instance.Add(new CompletePage());

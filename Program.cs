@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using Tizen.NUI;
 
@@ -7,17 +8,20 @@ namespace jjangchin_kiosk
     static class Program
     {
 
-
         public static Dictionary<string, User> globalData = new Dictionary<string, User>();
         public static User selectedUser;
+        public static string nowUserId = "";
+
+        public static Dictionary<string, object> nowUser;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
         static void Main(string[] args)
         {
-            
-            globalData.Add("2833670479702025", new User("서윤재",
+
+            globalData.Add("2833670479702025", new User("오정민",
                 new List<Item>(){ new Item("아인슈페너","~.png"),
                 new Item("apple","apple.png")},
                 new List<Item>()

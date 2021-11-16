@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using Tizen.NUI;
 using Tizen.NUI.BaseComponents;
 using Tizen.NUI.Components;
@@ -14,15 +15,10 @@ namespace jjangchin_kiosk
             InitializeComponent();
             Type = "Coffee";
 
-            List<string> li = new List<string>()
-                {
-                "아메리카노",
-                "라떼",
-                "바닐라 라떼",
-                "카페 모카",
-                "아인슈페너",
-                "연유 라떼"
-                };
+            string data = Utils.Request("/menu/beverage/");
+
+            var li = JsonConvert.DeserializeObject<List<string>>(data);
+
 
             foreach (string v in li)
             {
@@ -50,14 +46,9 @@ namespace jjangchin_kiosk
             {
                 this.adeBtn.BackgroundImage = "*Resource*/images/Selectpage.png";
                 this.coffeeBtn.BackgroundImage = "*Resource*/images/Selectpage2.png";
-                List<string> li = new List<string>()
-                {
-                "오렌지 에이드",
-                "자몽 에이드",
-                "레몬 에이드",
-                "망고 에이드",
-                "딸기 에이드"
-                };
+                string data = Utils.Request("/menu/food/");
+
+                var li = JsonConvert.DeserializeObject<List<string>>(data);
 
                 foreach (string v in li)
                 {
@@ -89,15 +80,10 @@ namespace jjangchin_kiosk
             {
                 this.adeBtn.BackgroundImage = "*Resource*/images/Selectpage2.png";
                 this.coffeeBtn.BackgroundImage = "*Resource*/images/Selectpage.png";
-                List<string> li = new List<string>()
-                {
-                "아메리카노",
-                "라떼",
-                "바닐라 라떼",
-                "카페 모카",
-                "아인슈페너",
-                "연유 라떼"
-                };
+
+                string data = Utils.Request("/menu/beverage/");
+
+                var li = JsonConvert.DeserializeObject<List<string>>(data);
 
                 foreach (string v in li)
                 {

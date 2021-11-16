@@ -26,7 +26,7 @@
         
         <View WidthSpecification="30" />
         <Button x:Name="coffeeBtn"
-            Text="커피"
+            Text="음료"
             FontFamily="배달의민족주아"
               TextColor="Black"
               ClickEvent="Coffee_Button_ClickEvent"
@@ -36,7 +36,7 @@
         <View WidthSpecification="30" />
 
         <Button x:Name="adeBtn"               
-              Text="에이드"
+              Text="디저트"
               FontFamily="배달의민족주아"
               TextColor="Black"
               ClickEvent="Ade_Button_ClickEvent"

@@ -4,7 +4,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>192.168.162.210:26101#4f9677fa-8e46-4975-bf03-48cd8a845788</ActiveDebugProfile>
+    <ActiveDebugProfile>192.168.0.39:26101#0081d782-0cd9-434a-85e7-1e0c8889278f</ActiveDebugProfile>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Update="Scene1Page.xaml">

@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using Tizen;
 using Tizen.NUI;
 using Tizen.NUI.BaseComponents;
 using Tizen.NUI.Components;
@@ -15,38 +18,49 @@ namespace jjangchin_kiosk
             InitializeComponent();
             
             Type = "User";
-            UserName = Program.selectedUser.Name;
+            UserName = Program.nowUser["name"].ToString();
             FirstDrink = "1위 음료";
             SecondDrink = "2위 음료";
             ThirdDrink = "3위 음료";
 
-            this.UserText.Text = $"[{UserName}]님이 가장 최근에 주문하신 음료는 [{Program.selectedUser.Resent[0].Name}]입니다.";
-            Button btn = new Button();
-            btn.Text = Program.selectedUser.Resent[0].Name;
-            btn.FontFamily = "배달의민족주아";
-            btn.TextColor = Color.Black;
-            btn.BackgroundImage = "*Resource*/images/button_background.png";
-            btn.Margin = new Extents(0, 20, 20, 20);
-            this.btnList.Add(btn);
-            btn.Clicked += (o, i) =>
+            string resentMenuData = Program.nowUser["recent_ordered"].ToString();
+            string resentMenu = resentMenuData.Length > 0 ? resentMenuData + "입니다." : "없습니다.";
+
+            this.UserText.Text = $"[{UserName}]님이 가장 최근에 주문하신 음료는 {resentMenuData}";
+
+            if (resentMenu != "없습니다.")
             {
-                Window.Instance.Add(new SelectPage(Program.selectedUser.Resent[0].Name, 2));
-            };
-            this.UserText2.Text = $"1위-[{Program.selectedUser.Recommand[0].Name}]  2위-[{Program.selectedUser.Recommand[1].Name}]  3위-[{Program.selectedUser.Recommand[2].Name}]";
+
+                Button btn = new Button();
+                btn.Text = resentMenuData;
+                btn.FontFamily = "배달의민족주아";
+                btn.TextColor = Color.Black;
+                btn.BackgroundImage = "*Resource*/images/button_background.png";
+                btn.Margin = new Extents(0, 20, 20, 20);
+                this.btnList.Add(btn);
+                btn.Clicked += (o, i) =>
+                {
+                    Window.Instance.Add(new SelectPage(resentMenuData, 2));
+                };
+            }
 
 
+            string[] mostOrdered = ((JArray)Program.nowUser["most_ordered"]).ToObject<string[]>();
+            //this.UserText2.Text = $"1위-[{Program.selectedUser.Recommand[0].Name}]  2위-[{Program.selectedUser.Recommand[1].Name}]  3위-[{Program.selectedUser.Recommand[2].Name}]";
+            this.UserText2.Text = mostOrdered.Length == 0 ? "카페 추천 메뉴: 자몽에이드" : string.Join(", ", mostOrdered);
 
-            foreach (Item v in Program.selectedUser.Recommand)
+
+            foreach (string v in mostOrdered)
             {
                 Button btn2 = new Button();
-                btn2.Text = v.Name;
+                btn2.Text = v;
                 btn2.FontFamily = "배달의민족주아";
                 btn2.TextColor = Color.Black;
                 btn2.BackgroundImage = "*Resource*/images/button_background.png";
                 btn2.Margin = new Extents(0, 20, 0, 20);
                 btn2.Clicked += (o, i) =>
                 {
-                    Window.Instance.Add(new SelectPage(v.Name, 2));
+                    Window.Instance.Add(new SelectPage(v, 2));
                 };
                 this.btnList2.Add(btn2);
             }
@@ -64,14 +78,9 @@ namespace jjangchin_kiosk
                 this.adeBtn.BackgroundImage = "*Resource*/images/Selectpage.png";
                 this.UserBtn.BackgroundImage = "*Resource*/images/Selectpage2.png";
                 this.coffeeBtn.BackgroundImage = "*Resource*/images/Selectpage2.png";
-                List<string> li = new List<string>()
-                {
-                "오렌지 에이드",
-                "자몽 에이드",
-                "레몬 에이드",
-                "망고 에이드",
-                "딸기 에이드"
-                };
+                string data = Utils.Request("/menu/food/");
+
+                var li = JsonConvert.DeserializeObject<List<string>>(data);
 
                 foreach (string v in li)
                 {
@@ -106,15 +115,9 @@ namespace jjangchin_kiosk
                 this.adeBtn.BackgroundImage = "*Resource*/images/Selectpage2.png";
                 this.UserBtn.BackgroundImage = "*Resource*/images/Selectpage2.png";
                 this.coffeeBtn.BackgroundImage = "*Resource*/images/Selectpage.png";
-                List<string> li = new List<string>()
-                {
-                "아메리카노",
-                "라떼",
-                "바닐라 라떼",
-                "카페 모카",
-                "아인슈페너",
-                "연유 라떼"
-                };
+                string data = Utils.Request("/menu/beverage/");
+
+                var li = JsonConvert.DeserializeObject<List<string>>(data);
 
                 foreach (string v in li)
                 {
@@ -140,13 +143,17 @@ namespace jjangchin_kiosk
             {
                 if(Type != "User")
                 { 
+
+
                         new List<View>(btnList.Children).ForEach(btnList.Remove);
                         this.adeBtn.BackgroundImage = "*Resource*/images/Selectpage2.png";
                         this.coffeeBtn.BackgroundImage = "*Resource*/images/Selectpage2.png";
                         this.UserBtn.BackgroundImage = "*Resource*/images/Selectpage.png";
-                        this.UserText.Text = $"[{UserName}]님이 가장 최근에 주문하신 음료는 [{Program.selectedUser.Resent[0].Name}]입니다.";
+                        string resentMenuData = Program.nowUser["recent_ordered"].ToString();
+                        string resentMenu = resentMenuData.Length > 0 ? resentMenuData + "입니다." : "없습니다.";
+                        this.UserText.Text = $"[{UserName}]님이 가장 최근에 주문하신 음료는 {resentMenu}";
                         Button btn = new Button();
-                        btn.Text = Program.selectedUser.Resent[0].Name;
+                        btn.Text = resentMenuData;
                         btn.FontFamily = "배달의민족주아";
                         btn.TextColor = Color.Black;
                         btn.BackgroundImage = "*Resource*/images/button_background.png";
@@ -154,17 +161,15 @@ namespace jjangchin_kiosk
                         this.btnList.Add(btn);
                         btn.Clicked += (o, i) =>
                         {
-                            Window.Instance.Add(new SelectPage(Program.selectedUser.Resent[0].Name, 2));
+                            Window.Instance.Add(new SelectPage(resentMenuData, 2));
                         };
-                    this.UserText2.Text = $"1위-[{FirstDrink}]  2위-[{SecondDrink}]  3위-[{ThirdDrink}]";
-                    List<string> li = new List<string>()
-                    {
-                    FirstDrink,
-                    SecondDrink,
-                    ThirdDrink
-                    };
 
-                foreach (string v in li)
+                        string[] mostOrdered = ((JArray)Program.nowUser["most_ordered"]).ToObject<string[]>();
+                        //this.UserText2.Text = $"1위-[{Program.selectedUser.Recommand[0].Name}]  2위-[{Program.selectedUser.Recommand[1].Name}]  3위-[{Program.selectedUser.Recommand[2].Name}]";
+                        this.UserText2.Text = mostOrdered.Length == 0 ? "카페 추천 메뉴: 자몽에이드" : string.Join(", ", mostOrdered);
+        //                this.UserText2.Text = $"1위-[{FirstDrink}]  2위-[{SecondDrink}]  3위-[{ThirdDrink}]";
+ 
+                foreach (string v in mostOrdered)
                 {
                     Button btn2 = new Button();
                     btn2.Text = v;

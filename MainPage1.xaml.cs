@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using Tizen;
 using Tizen.NUI;
 using Tizen.NUI.BaseComponents;
 
@@ -24,12 +26,24 @@ namespace jjangchin_kiosk{
 
         private void textField_TextChanged(object sender, TextField.TextChangedEventArgs e)
         {
+            Program.nowUserId = e.TextField.Text;
 
-            if (Program.globalData.ContainsKey(e.TextField.Text))
+            if (e.TextField.Text.Length == 16)
             {
+                Log.Info("owjs3901", "LOGIN");
 
 
-                Program.selectedUser = Program.globalData[e.TextField.Text];
+                var obj = JsonConvert.DeserializeObject<Dictionary<string, object>>(Utils.Request("/user/" + e.TextField.Text));
+
+                if(!obj.ContainsKey("res"))
+                {
+                    Program.nowUser = obj;
+                }
+                else
+                {
+                    Program.nowUser = JsonConvert.DeserializeObject<Dictionary<string, object>>(Utils.RequestPost("/user/" + e.TextField.Text));
+                }
+                Log.Fatal("owjs3901", "NOW!!");
                 Window.Instance.Add(new KioskPage2());
             }
 
