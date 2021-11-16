@@ -17,11 +17,13 @@
 # 2021 AI 융합 경진대회
 ![Alt text](/img/AIposter.jpg)
 - **[최주형](https://github.com/Juhyung98)(팀장 - SW 개발자)**
-> 
-> 
+> 서버 개발 총괄
+> 키오스크 서버 개발
 
+# 팀원 사진
 ![Alt text](/img/member.jpg)
 ![Alt text](/img/member2.jpg)
+
 # 개요
 구매 내역 분석을 통한 상품 추천 키오스크를 개발한다. <br />
 이를 통하여 사용자들이 키오스크를 사용하는 시간이 줄어들어 키오스크 앞의 인구 밀집도를 낮출 수 있다. <br />
