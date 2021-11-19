@@ -47,28 +47,28 @@ class Menu:
         self.temperature = 0
         self.calorie = 0
         self.milk = ""
-    catecory:CategoryName = None
+    category:CategoryName = None
 
 
 yeon = Member("yeon-dong")
 yeon.recent_ordered = "아메리카노"
 yeon.most_ordered = ["아메리카노"]
 yeon.visit_num = 5
-yeon.id = 1
+yeon.id = 2861183814422024
 yeon.order = {"아메리카노" : 4, "카페라떼" : 1}
 
 owjs = Member("owjs3901")
 owjs.recent_ordered = "카페라떼"
 owjs.most_ordered = ["아인슈페너"]
 owjs.visit_num = 3
-owjs.id = 2
+owjs.id = 2833670479702025
 owjs.order = {"카페라떼" : 1, "아인슈페너" : 2}
 
 juhyung = Member("juhyung")
 juhyung.recent_ordered = "연유라떼"
 juhyung.most_ordered = ["딸기스무디"]
 juhyung.visit_num = 8
-juhyung.id = 3
+juhyung.id = 2917100827764244
 juhyung.order = {"딸기스무디" : 5, "아인슈페너" : 2, "연유라떼" : 1}
 
 
@@ -99,6 +99,33 @@ milk_latte.calorie = 60
 milk_latte.milk = "milk"
 
 
+Einspener = Menu("아인슈페너")
+Einspener.price = 5000
+Einspener.category = CategoryName.coffee
+Einspener.sugar = "sugar"
+Einspener.temperature = 1
+Einspener.calorie = 80
+Einspener.milk = "milk"
+
+
+vanilla_latte = Menu("바닐라라떼")
+vanilla_latte.price = 5000
+vanilla_latte.category = CategoryName.coffee
+vanilla_latte.sugar = "sugar"
+vanilla_latte.temperature = 1
+vanilla_latte.calorie = 80
+vanilla_latte.milk = "milk"
+
+
+cafe_mocha = Menu("카페모카")
+cafe_mocha.price = 5300
+cafe_mocha.category = CategoryName.coffee
+cafe_mocha.sugar = "non-sugar"
+cafe_mocha.temperature = 1
+cafe_mocha.calorie = 100
+cafe_mocha.milk = "milk"
+
+
 strawberry_smoothie = Menu("딸기스무디")
 strawberry_smoothie.price = 6000
 strawberry_smoothie.category = CategoryName.smoothie
@@ -108,9 +135,18 @@ strawberry_smoothie.calorie = 100
 strawberry_smoothie.milk = "non-milk"
 
 
+berry_smoothie = Menu("블루베리스무디")
+berry_smoothie.price = 6000
+berry_smoothie.category = CategoryName.smoothie
+berry_smoothie.sugar = "sugar"
+berry_smoothie.temperature = 1
+berry_smoothie.calorie = 120
+berry_smoothie.milk = "non-milk"
+
+
 cake = Menu("케이크")
 cake.price = 4500
-cake.catecory = CategoryName.food
+cake.category = CategoryName.food
 cake.sugar = "sugar"
 cake.temperature = 0
 cake.calorie = 120
@@ -119,19 +155,18 @@ cake.milk = "non-milk"
 
 cookie = Menu("쿠키")
 cookie.price = 3000
-cookie.catecory = CategoryName.food
+cookie.category = CategoryName.food
 cookie.sugar = "sugar"
 cookie.temperature = 0
 cookie.calorie = 200
 cookie.milk = "non-milk"
 
 
-member_info = {1 : yeon, 2 : owjs, 3 : juhyung}
+member_info = {2861183814422024 : yeon, 2833670479702025 : owjs, 2917100827764244 : juhyung}
 member_name = ["yeon-dong", "owjs3901", "juhyung"]
-next_id = [4]
+next_id = [0]
 
-# beverage = ["아메리카노", "카페라떼", "아인슈페너", "연유라떼", "딸기스무디", "바닐라 라떼"]
-menu_list = [americano, cafe_latte, milk_latte, strawberry_smoothie, cake, cookie]
+menu_list = [americano, cafe_latte, milk_latte, strawberry_smoothie, cake, cookie, Einspener, berry_smoothie, vanilla_latte, cafe_mocha]
 order_list = ["카페라떼", "아메리카노", "아메리카노"]
 
 @app.get("/")
@@ -155,18 +190,17 @@ async def show_info(customer_id : int):
 
 
 ## create user
-@app.post("/user/")
-async def generate_id(name):
-    if name in member_name:
+@app.post("/user/{user_id}")
+async def generate_id(user_id : int):
+    if user_id in member_info:
         # print(name + " 님은 회원 정보가 이미 존재합니다.")
         return {"res": False}
     else:
-        customer = Member(name)
-        member_name.append(name)
+        customer = Member("익명")
+        member_name.append("익명")
         customer.visit_num = 1
-        customer_id = next_id[0]
-        next_id[0] += 1
-        member_info[customer_id] = customer
+        customer.id = user_id
+        member_info[customer.id] = customer
         # print(customer.name + " 님의 회원 정보가 등록되었습니다.\n회원 아이디는 [" + str(customer_id) + "] 입니다.")
         return customer
 
@@ -260,8 +294,8 @@ async def remove_beverage(product):
 @app.get("/menu/{category}")
 async def show_menu(category: CategoryName):
     if category == CategoryName.beverage:
-        return list(map(lambda e:e.name, filter(lambda e:e.catecory != "food", menu_list)))       
+        return list(map(lambda e:e.name, filter(lambda e:e.category != "food", menu_list)))       
     elif category == CategoryName.all:
         return list(map(lambda e:e.name, menu_list))
     else:
-        return list(map(lambda e:e.name, filter(lambda e:e.catecory == category, menu_list)))
+        return list(map(lambda e:e.name, filter(lambda e:e.category == category, menu_list)))
