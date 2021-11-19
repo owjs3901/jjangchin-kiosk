@@ -258,16 +258,18 @@ def read_root():
 ## show user info
 @app.get("/user/{customer_id}")
 async def show_info(customer_id : int):
-    customer = member_info[customer_id]
-    customer.name_info()
-    customer.recent_ordered_info()
-    customer.most_ordered = [key for key, val in customer.order.items() if max(customer.order.values()) == val]
-    customer.most_ordered_info()
-    customer.visit_num += 1
-    customer.visit_num_info()
-    customer.id_info()
-    print("\n방문해주셔서 갑사합니다 ~^~^~")
-    return customer
+    if customer_id in member_info:  
+        customer = member_info[customer_id]
+        customer.name_info()
+        customer.recent_ordered_info()
+        customer.most_ordered = [key for key, val in customer.order.items() if max(customer.order.values()) == val]
+        customer.most_ordered_info()
+        customer.visit_num += 1
+        customer.visit_num_info()
+        customer.id_info()
+        print("\n방문해주셔서 갑사합니다 ~^~^~")
+        return customer
+    return {"res" : False}
 
 
 ## create user
