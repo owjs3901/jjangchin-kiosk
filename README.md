@@ -97,6 +97,11 @@ Scene1.cs|
 Class1.cs|
 Program.cs|
 
+**최주형**
+파일명 |
+:---- |
+jj_server/main.py|
+
 # 구현사항
 * Peripheral GPIO : 적외선 모션 감지 센서, GPIO 4<br />
 * 바코드 스캐너(B-210)
