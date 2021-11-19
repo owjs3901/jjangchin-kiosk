@@ -16,8 +16,9 @@
 
 # 2021 AI 융합 경진대회
 ![Alt text](/img/AIposter.jpg)
+
 - **[최주형](https://github.com/Juhyung98)(팀장 - SW 개발자)**
-> 서버 개발 총괄
+> 서버 개발 총괄<br />
 > 키오스크 서버 개발
 
 # 팀원 사진
