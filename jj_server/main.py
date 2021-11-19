@@ -6,7 +6,7 @@ app = FastAPI()
 class CategoryName(str, Enum):
     beverage = "beverage"
     coffee = "coffee"
-    smoothie = "smoothie"
+    ade = "ade"
     food = "food"
     all = "all"
 
@@ -47,6 +47,10 @@ class Menu:
         self.temperature = 0
         self.calorie = 0
         self.milk = ""
+        self.cream = ""
+        self.syrup = ""
+        self.taste = ""
+        self.fruit = ""
     category:CategoryName = None
 
 
@@ -79,6 +83,8 @@ americano.sugar = "sugar-free"
 americano.temperature = 3
 americano.calorie = 30
 americano.milk = "non-milk"
+americano.cream = "non-cream"
+americano.syrup = "non-syrup"
 
 
 cafe_latte = Menu("카페라떼")
@@ -88,6 +94,8 @@ cafe_latte.sugar = "sugar-free"
 cafe_latte.temperature = 3
 cafe_latte.calorie = 50
 cafe_latte.milk = "milk"
+cafe_latte.cream = "non-cream"
+cafe_latte.syrup = "non-syrup"
 
 
 milk_latte = Menu("연유라떼")
@@ -97,6 +105,8 @@ milk_latte.sugar = "sugar"
 milk_latte.temperature = 3
 milk_latte.calorie = 60
 milk_latte.milk = "milk"
+milk_latte.cream = "non-cream"
+milk_latte.syrup = "condensed-milk"
 
 
 Einspener = Menu("아인슈페너")
@@ -106,6 +116,8 @@ Einspener.sugar = "sugar"
 Einspener.temperature = 1
 Einspener.calorie = 80
 Einspener.milk = "milk"
+Einspener.cream = "cream"
+Einspener.syrup = "non-syrup"
 
 
 vanilla_latte = Menu("바닐라라떼")
@@ -115,6 +127,8 @@ vanilla_latte.sugar = "sugar"
 vanilla_latte.temperature = 1
 vanilla_latte.calorie = 80
 vanilla_latte.milk = "milk"
+vanilla_latte.cream = "non-cream"
+vanilla_latte.syrup = "vanilla"
 
 
 cafe_mocha = Menu("카페모카")
@@ -124,33 +138,100 @@ cafe_mocha.sugar = "non-sugar"
 cafe_mocha.temperature = 1
 cafe_mocha.calorie = 100
 cafe_mocha.milk = "milk"
+cafe_mocha.cream = "non-cream"
+cafe_mocha.syrup = "choco"
 
 
-strawberry_smoothie = Menu("딸기스무디")
-strawberry_smoothie.price = 6000
-strawberry_smoothie.category = CategoryName.smoothie
-strawberry_smoothie.sugar = "sugar"
-strawberry_smoothie.temperature = 1
-strawberry_smoothie.calorie = 100
-strawberry_smoothie.milk = "non-milk"
+grapefruit_ade = Menu("자몽에이드")
+grapefruit_ade.price = 6000
+grapefruit_ade.category = CategoryName.ade
+grapefruit_ade.sugar = "non-sugar"
+grapefruit_ade.temperature = 1
+grapefruit_ade.calorie = 100
+grapefruit_ade.milk = "non-milk"
+grapefruit_ade.cream = "non-cream"
+grapefruit_ade.syrup = "syrup"
+grapefruit_ade.taste = "no-sour"
+grapefruit_ade.fruit = "grapefruit"
 
 
-berry_smoothie = Menu("블루베리스무디")
-berry_smoothie.price = 6000
-berry_smoothie.category = CategoryName.smoothie
-berry_smoothie.sugar = "sugar"
-berry_smoothie.temperature = 1
-berry_smoothie.calorie = 120
-berry_smoothie.milk = "non-milk"
+lemon_ade = Menu("레몬에이드")
+lemon_ade.price = 6000
+lemon_ade.category = CategoryName.ade
+lemon_ade.sugar = "non-sugar"
+lemon_ade.temperature = 1
+lemon_ade.calorie = 180
+lemon_ade.milk = "non-milk"
+lemon_ade.cream = "non-cream"
+lemon_ade.syrup = "syrup"
+lemon_ade.taste = "sour"
+lemon_ade.fruit = "lemon"
 
 
-cake = Menu("케이크")
-cake.price = 4500
-cake.category = CategoryName.food
-cake.sugar = "sugar"
-cake.temperature = 0
-cake.calorie = 120
-cake.milk = "non-milk"
+mango_ade = Menu("망고에이드")
+mango_ade.price = 6000
+mango_ade.category = CategoryName.ade
+mango_ade.sugar = "sugar"
+mango_ade.temperature = 1
+mango_ade.calorie = 200
+mango_ade.milk = "non-milk"
+mango_ade.cream = "non-cream"
+mango_ade.syrup = "syrup"
+mango_ade.taste = "non-sour"
+mango_ade.fruit = "mango"
+
+
+orange_ade = Menu("오렌지에이드")
+orange_ade.price = 6000
+orange_ade.category = CategoryName.ade
+orange_ade.sugar = "sugar"
+orange_ade.temperature = 1
+orange_ade.calorie = 200
+orange_ade.milk = "non-milk"
+orange_ade.cream = "non-cream"
+orange_ade.syrup = "syrup"
+orange_ade.taste = "non-sour"
+orange_ade.fruit = "orange"
+
+
+berry_ade = Menu("딸기에이드")
+berry_ade.price = 6000
+berry_ade.category = CategoryName.ade
+berry_ade.sugar = "non-sugar"
+berry_ade.temperature = 1
+berry_ade.calorie = 150
+berry_ade.milk = "non-milk"
+berry_ade.cream = "non-cream"
+berry_ade.syrup = "syrup"
+berry_ade.taste = "non-sour"
+berry_ade.fruit = "berry"
+
+
+choco_cake = Menu("초코케이크")
+choco_cake.price = 5000
+choco_cake.category = CategoryName.food
+choco_cake.sugar = "sugar"
+choco_cake.temperature = 0
+choco_cake.calorie = 300
+choco_cake.milk = "non-milk"
+
+
+strawberry_cake = Menu("딸기케이크")
+strawberry_cake.price = 4500
+strawberry_cake.category = CategoryName.food
+strawberry_cake.sugar = "sugar"
+strawberry_cake.temperature = 0
+strawberry_cake.calorie = 230
+strawberry_cake.milk = "non-milk"
+
+
+sandwich = Menu("샌드위치")
+sandwich.price = 3500
+sandwich.category = CategoryName.food
+sandwich.sugar = "non-sugar"
+sandwich.temperature = 0
+sandwich.calorie = 80
+sandwich.milk = "non-milk"
 
 
 cookie = Menu("쿠키")
@@ -166,7 +247,7 @@ member_info = {2861183814422024 : yeon, 2833670479702025 : owjs, 291710082776424
 member_name = ["yeon-dong", "owjs3901", "juhyung"]
 next_id = [0]
 
-menu_list = [americano, cafe_latte, milk_latte, strawberry_smoothie, cake, cookie, Einspener, berry_smoothie, vanilla_latte, cafe_mocha]
+menu_list = [americano, cafe_latte, milk_latte, grapefruit_ade, choco_cake, strawberry_cake, sandwich, cookie, Einspener, berry_ade, mango_ade, lemon_ade, vanilla_latte, cafe_mocha]
 order_list = ["카페라떼", "아메리카노", "아메리카노"]
 
 @app.get("/")
