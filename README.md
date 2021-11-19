@@ -14,12 +14,13 @@
 > RPI4 Tizen Setting<br />
 > 하드웨어 설계 및 연동
 
-# 2021 AI 융합 경진대회
-![Alt text](/img/AIposter.jpg)
-
 - **[최주형](https://github.com/Juhyung98)(팀장 - SW 개발자)**
 > 서버 개발 총괄<br />
 > 키오스크 서버 개발
+
+# 2021 AI 융합 경진대회
+![Alt text](/img/AIposter.jpg)
+
 
 # 팀원 사진
 ![Alt text](/img/member.jpg)
