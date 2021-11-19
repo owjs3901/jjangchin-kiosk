@@ -54,21 +54,21 @@ class Menu:
     category:CategoryName = None
 
 
-yeon = Member("yeon-dong")
+yeon = Member("임동연")
 yeon.recent_ordered = "아메리카노"
 yeon.most_ordered = ["아메리카노"]
 yeon.visit_num = 5
 yeon.id = 2861183814422024
 yeon.order = {"아메리카노" : 4, "카페라떼" : 1}
 
-owjs = Member("owjs3901")
+owjs = Member("오정민")
 owjs.recent_ordered = "카페라떼"
 owjs.most_ordered = ["아인슈페너"]
 owjs.visit_num = 3
 owjs.id = 2833670479702025
 owjs.order = {"카페라떼" : 1, "아인슈페너" : 2}
 
-juhyung = Member("juhyung")
+juhyung = Member("최주형")
 juhyung.recent_ordered = "연유라떼"
 juhyung.most_ordered = ["딸기스무디"]
 juhyung.visit_num = 8
